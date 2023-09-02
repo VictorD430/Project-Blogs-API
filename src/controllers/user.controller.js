@@ -5,6 +5,12 @@ const newUser = async (req, res) => {
   return res.status(responseFromService.status).json(responseFromService.data);
 };
 
+const getAll = async (_req, res) => {
+  const responseFromService = await userService.getAll();
+  return res.status(responseFromService.status).json(responseFromService.data);
+};
+
 module.exports = {
   newUser,
+  getAll,
 };

@@ -1,11 +1,11 @@
 const jWebToken = require('jsonwebtoken');
 
-const genToken = (req, res, next) => {
+const tokenAuth = (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return res.status(401).json({ message: 'Token not found' });
   }
-  const authToken = authorization.replace(' ', '');
+  const authToken = authorization.split(' ')[1];
   try {
     jWebToken.verify(authToken, process.env.JWT_SECRET);
     next();
@@ -14,4 +14,4 @@ const genToken = (req, res, next) => {
   }
 };
 
-module.exports = genToken;
+module.exports = tokenAuth;
